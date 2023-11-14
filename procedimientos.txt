@@ -1,0 +1,240 @@
+-- Procedimientos Almacenados para Estudiantes
+/* Registrar Estudiante */
+CREATE PROCEDURE sp_RegistrarEstudiante
+    @nombres VARCHAR(30),
+    @apellidos VARCHAR(30),
+    @fecha_nacimiento DATE,
+    @correo VARCHAR(100),
+    @direccion VARCHAR(100)
+AS
+BEGIN
+    INSERT INTO Estudiantes (nombres, apellidos, fecha_nacimiento, correo, direccion)
+    VALUES (@nombres, @apellidos, @fecha_nacimiento, @correo, @direccion);
+END;
+
+/* Mostrar Estudiantes */
+CREATE PROCEDURE sp_MostrarEstudiantes
+AS
+BEGIN
+    SELECT * FROM Estudiantes;
+END;
+
+/* Editar Estudiante */
+CREATE PROCEDURE sp_EditarEstudiante
+    @ID_estudiante INT,
+    @nombres VARCHAR(30),
+    @apellidos VARCHAR(30),
+    @fecha_nacimiento DATE,
+    @correo VARCHAR(100),
+    @direccion VARCHAR(100)
+AS
+BEGIN
+    UPDATE Estudiantes
+    SET
+        nombres = @nombres,
+        apellidos = @apellidos,
+        fecha_nacimiento = @fecha_nacimiento,
+        correo = @correo,
+        direccion = @direccion
+    WHERE ID_estudiante = @ID_estudiante;
+END;
+
+/* Eliminar Estudiante */
+CREATE PROCEDURE sp_EliminarEstudiante
+    @ID_estudiante INT
+AS
+BEGIN
+    DELETE FROM Estudiantes
+    WHERE ID_estudiante = @ID_estudiante;
+END;
+
+-- Procedimientos Almacenados para Cursos
+/* Registrar Curso */
+CREATE PROCEDURE sp_RegistrarCurso
+    @nombre_curso VARCHAR(30),
+    @descripcion VARCHAR(30),
+    @creditos INT,
+    @ID_Profesor INT
+AS
+BEGIN
+    INSERT INTO Cursos (nombre_curso, descripcion, creditos, ID_Profesor)
+    VALUES (@nombre_curso, @descripcion, @creditos, @ID_Profesor);
+END;
+
+/* Mostrar Cursos */
+CREATE PROCEDURE sp_MostrarCursos
+AS
+BEGIN
+    SELECT * FROM Cursos;
+END;
+
+/* Editar Curso */
+CREATE PROCEDURE sp_EditarCurso
+    @ID_curso INT,
+    @nombre_curso VARCHAR(30),
+    @descripcion VARCHAR(30),
+    @creditos INT,
+    @ID_Profesor INT
+AS
+BEGIN
+    UPDATE Cursos
+    SET
+        nombre_curso = @nombre_curso,
+        descripcion = @descripcion,
+        creditos = @creditos,
+        ID_Profesor = @ID_Profesor
+    WHERE ID_curso = @ID_curso;
+END;
+
+/* Eliminar Curso */
+CREATE PROCEDURE sp_EliminarCurso
+    @ID_curso INT
+AS
+BEGIN
+    DELETE FROM Cursos
+    WHERE ID_curso = @ID_curso;
+END;
+
+-- Procedimientos Almacenados para Matriculas
+/* Registrar Matricula */
+CREATE PROCEDURE sp_RegistrarMatricula
+    @ID_estudiante INT,
+    @ID_curso INT,
+    @fecha_matricula DATE,
+    @estado CHAR(2)
+AS
+BEGIN
+    INSERT INTO Matriculas (ID_estudiante, ID_curso, fecha_matricula, estado)
+    VALUES (@ID_estudiante, @ID_curso, @fecha_matricula, @estado);
+END;
+
+/* Mostrar Matriculas */
+CREATE PROCEDURE sp_MostrarMatriculas
+AS
+BEGIN
+    SELECT * FROM Matriculas;
+END;
+
+/* Editar Matricula */
+CREATE PROCEDURE sp_EditarMatricula
+    @ID_matricula INT,
+    @ID_estudiante INT,
+    @ID_curso INT,
+    @fecha_matricula DATE,
+    @estado CHAR(2)
+AS
+BEGIN
+    UPDATE Matriculas
+    SET
+        ID_estudiante = @ID_estudiante,
+        ID_curso = @ID_curso,
+        fecha_matricula = @fecha_matricula,
+        estado = @estado
+    WHERE ID_matricula = @ID_matricula;
+END;
+
+/* Eliminar Matricula */
+CREATE PROCEDURE sp_EliminarMatricula
+    @ID_matricula INT
+AS
+BEGIN
+    DELETE FROM Matriculas
+    WHERE ID_matricula = @ID_matricula;
+END;
+
+-- Procedimientos Almacenados para Profesores
+/* Registrar Profesor */
+CREATE PROCEDURE sp_RegistrarProfesor
+    @nombres VARCHAR(30),
+    @apellidos VARCHAR(30),
+    @correo VARCHAR(100),
+    @direccion VARCHAR(100)
+AS
+BEGIN
+    INSERT INTO Profesores (nombres, apellidos, correo, direccion)
+    VALUES (@nombres, @apellidos, @correo, @direccion);
+END;
+
+/* Mostrar Profesores */
+CREATE PROCEDURE sp_MostrarProfesores
+AS
+BEGIN
+    SELECT * FROM Profesores;
+END;
+
+/* Editar Profesor */
+CREATE PROCEDURE sp_EditarProfesor
+    @ID_profesor INT,
+    @nombres VARCHAR(30),
+    @apellidos VARCHAR(30),
+    @correo VARCHAR(100),
+    @direccion VARCHAR(100)
+AS
+BEGIN
+    UPDATE Profesores
+    SET
+        nombres = @nombres,
+        apellidos = @apellidos,
+        correo = @correo,
+        direccion = @direccion
+    WHERE ID_profesor = @ID_profesor;
+END;
+
+/* Eliminar Profesor */
+CREATE PROCEDURE sp_EliminarProfesor
+    @ID_profesor INT
+AS
+BEGIN
+    DELETE FROM Profesores
+    WHERE ID_profesor = @ID_profesor;
+END;
+
+-- Procedimientos Almacenados para Horarios
+/* Registrar Horario */
+CREATE PROCEDURE sp_RegistrarHorario
+    @ID_curso INT,
+    @dia_semana VARCHAR(30),
+    @hora_inicio INT,
+    @hora_fin INT,
+    @aula VARCHAR(100)
+AS
+BEGIN
+    INSERT INTO Horarios (ID_curso, dia_semana, hora_inicio, hora_fin, aula)
+    VALUES (@ID_curso, @dia_semana, @hora_inicio, @hora_fin, @aula);
+END;
+
+/* Mostrar Horarios */
+CREATE PROCEDURE sp_MostrarHorarios
+AS
+BEGIN
+    SELECT * FROM Horarios;
+END;
+
+/* Editar Horario */
+CREATE PROCEDURE sp_EditarHorario
+    @ID_horario INT,
+    @ID_curso INT,
+    @dia_semana VARCHAR(30),
+    @hora_inicio INT,
+    @hora_fin INT,
+    @aula VARCHAR(100)
+AS
+BEGIN
+    UPDATE Horarios
+    SET
+        ID_curso = @ID_curso,
+        dia_semana = @dia_semana,
+        hora_inicio = @hora_inicio,
+        hora_fin = @hora_fin,
+        aula = @aula
+    WHERE ID_horario = @ID_horario;
+END;
+
+/* Eliminar Horario */
+CREATE PROCEDURE sp_EliminarHorario
+    @ID_horario INT
+AS
+BEGIN
+    DELETE FROM Horarios
+    WHERE ID_horario = @ID_horario;
+END;
